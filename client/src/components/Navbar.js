@@ -18,7 +18,7 @@ const Navbar = () => {
       return [
         <div>
           <li key="1"><i data-target="modal1" className="large material-icons modal-trigger" style={{color:"black",cursor: "pointer"}}>search</i></li>
-          <li key="2"><Link to="/createpost">Createpost</Link></li>
+          <li key="2"><Link to="/createpost">Create post</Link></li>
           <li key="3"><Link to="/profile">Profile</Link></li>
           <li key="4"><Link to="/subposts">My Following Posts</Link></li>
           <button class="btn #e53935 red darken-1"

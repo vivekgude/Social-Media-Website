@@ -151,7 +151,7 @@ const Home = (props) => {
         console.log(state._id)
         return (
           <div className="card home-card" key={item._id}>
-            <div className="cardtitle" style={{padding:"10px"}}>
+            <div className="cardtitle" style={{padding:"10px",alignItems:"center",display:"flex",justifyContent:"space-between"}}>
               <Box style={{display:"flex",alignItems:"center" , gap:"15px"}}>
                 <Avatar src={item.postedBy.profilepic} alt={item.postedBy.name}/>
                 <Typography style={{cursor:"pointer",fontSize:"14px",fontWeight:"600"}} onClick={()=>navigateTo(item)}>
@@ -196,7 +196,8 @@ const Home = (props) => {
               <h6>{item.likes.length} likes</h6>
               <h6>{item.title}</h6>
               <p>{item.body}</p>
-              <div style={{maxHeight:"200px",overflow:"scroll"}}>
+              {comments && comments.length > 0 && <div style={{maxHeight:"200px",overflowY:"auto",width:"100%",marginTop:"20px"}}>
+                <Typography style={{fontWeight:"500" , fontSize:"15px"}}>Comments</Typography>
               <List sx={{paddingLeft:"0px"}}>
               {comments.map((record) => {
                 return (
@@ -209,7 +210,7 @@ const Home = (props) => {
                 );
               })}
               </List>
-              </div>
+              </div>}
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
