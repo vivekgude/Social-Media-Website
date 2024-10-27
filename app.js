@@ -1,4 +1,5 @@
 import express, { json } from 'express';
+import path from 'path';
 import connectDB from './config/database.js';
 import './models/otp.js';
 import './models/post.js';
@@ -19,11 +20,11 @@ app.use('', postRoutes);
 app.use('', userRoutes);
 
 if (process.env.NODE_ENV == "production") {
-    app.use('client/build')
-    const path = require('path')
+    const clientBuildPath = path.resolve(__dirname, 'client', 'build');
+    app.use(express.static(clientBuildPath));
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
+        res.sendFile(path.join(clientBuildPath, 'index.html'));
+    });
 }
 
 app.listen(PORT, () => {
