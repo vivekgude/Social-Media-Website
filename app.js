@@ -1,35 +1,31 @@
-const express = require('express');
+import express, { json } from 'express';
+import connectDB from './config/database.js';
+import './models/otp.js';
+import './models/post.js';
+import './models/user.js';
+import authRoutes from './routes/auth.js';
+import postRoutes from './routes/post.js';
+import userRoutes from './routes/user.js';
+
+
 const app = express();
-const mongoose = require('mongoose');
-const {MONGOURI} = require('./config/keys');
-
 const PORT = process.env.PORT || 3001;
+app.use(json());
 
-mongoose.connect(MONGOURI)
-mongoose.connection.on('connected',()=>{
-    console.log("Connected to dbms");
-})
-mongoose.connection.on('error',(err)=>{
-    console.log(err);
-})
+connectDB();
 
-app.listen(PORT,()=>{
-    console.log("Server is running on",PORT)
-})
+app.use('', authRoutes);
+app.use('', postRoutes);
+app.use('', userRoutes);
 
-require('./models/user');
-require('./models/post');
-require('./models/otp')
-
-app.use(express.json())
-app.use(require('./routes/auth'))
-app.use(require('./routes/post'))
-app.use(require('./routes/user'))
-
-if(process.env.NODE_ENV=="production"){
-    app.use(express.static('client/build'))
-    const path  = require('path')
-    app.get("*",(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+if (process.env.NODE_ENV == "production") {
+    app.use('client/build')
+    const path = require('path')
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
+
+app.listen(PORT, () => {
+    console.log("Server is running on", PORT)
+})

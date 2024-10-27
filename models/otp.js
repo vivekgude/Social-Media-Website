@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const otpSchema = new mongoose.Schema({
-    email:{
-        type:String,
-        required:true,
+const otpSchema = new Schema({
+    email: {
+        type: String,
+        required: true,
     },
-    code:{
-        type:String,
-        required:true,
+    code: {
+        type: String,
+        required: true,
     },
-    expiryIn:{
-        type:Number,
-        required:true
+    expiryIn: {
+        type: Number,
+        required: true
     }
 });
 
-mongoose.model("Otp",otpSchema)
+model("Otp", otpSchema)
