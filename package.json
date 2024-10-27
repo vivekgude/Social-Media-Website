@@ -4,16 +4,17 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "heroku-postbuild": "NPM_CONFIG_PODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "dotenv": "^16.4.5",
     "express": "^4.17.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^6.1.4",
     "nodemailer": "^6.7.3"
-  }
+  },
+  "type": "module"
 }
